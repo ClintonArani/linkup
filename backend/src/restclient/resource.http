@@ -1,0 +1,114 @@
+### ADD A RESOURCE
+POST http://localhost:9000/resources/add
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Introduction to Node.js
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+A comprehensive guide to Node.js development.
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="quantity"
+
+10
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="nodejs-guide.pdf"
+Content-Type: application/pdf
+
+< ./path/to/nodejs-guide.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="nodejs-cover.jpg"
+Content-Type: image/jpeg
+
+< ./path/to/nodejs-cover.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### EDIT A RESOURCE
+PUT http://localhost:9000/resources/edit/27aacd6a-96b8-4e56-8291-12b6b2265494
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Advanced Node.js
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+An advanced guide to Node.js development.
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="quantity"
+
+15
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="nodejs-guide.pdf"
+Content-Type: application/pdf
+
+< ./path/to/advanced-nodejs-guide.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="nodejs-cover.jpg"
+Content-Type: image/jpeg
+
+< ./path/to/clinton.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### SOFT DELETE A RESOURCE
+DELETE http://localhost:9000/resources/delete/bba5d688-5d46-47be-85ce-e34fe8e42e07
+Content-Type: application/json
+
+
+### BORROW A BOOK
+POST http://localhost:9000/resources/borrow
+Content-Type: application/json
+
+{
+    "user_id": "d3c7649e-43ba-4962-b701-ca651c579f17",
+    "resource_id": "2c407132-25f3-42c3-a048-64ea191a1264",
+    "return_date": "2025-3-4"
+}
+
+
+### GET ALL BORROWED BOOKS
+GET http://localhost:9000/resources/borrowed-books
+Content-Type: application/json
+
+
+### GET OVERDUE BOOKS
+GET http://localhost:9000/resources/overdue-books
+Content-Type: application/json
+
+
+### VIEW RESOURCE
+GET http://localhost:9000/resources/view/e750d59c-d0de-4d3f-a09b-e0ab70280269
+Content-Type: application/json
+
+
+### GET ALL RESOURCES
+GET http://localhost:9000/resources/all
+Content-Type: application/json
+
+
+### GET SINGLE RESOURCE BY ID
+GET http://localhost:9000/resources/single/e750d59c-d0de-4d3f-a09b-e0ab70280269
+Content-Type: application/json
+
+### RETURN A BOOK
+POST http://localhost:9000/resources/return
+Content-Type: application/json
+
+{
+    "resource_id": "e750d59c-d0de-4d3f-a09b-e0ab70280269",
+    "user_id": "5576d17e-9903-4418-812b-92678ff8d184"
+}
+
+### books borrwed by a user
+GET http://localhost:9000/resources/borrowed-by-user/d3c7649e-43ba-4962-b701-ca651c579f17
+
+
+### get ovedue book on a givem user
+
+GET http://localhost:9000/resources/overdue-by-user/a7b7abec-6bd7-447f-a796-7807efd7417d

@@ -1,0 +1,52 @@
+.card{
+  background-color: white;
+  color: black;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  box-shadow: 0 0 15px 10px rgba(255, 255, 255, 0.8);
+}
+textarea{
+  background: transparent;
+  box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.8);
+  color: black;
+
+}
+::placeholder{
+  color: black;
+  font-weight: bold;
+}
+.post-btn{
+  margin-top: -2.5rem;
+}
+.profile-image{
+  width: 4rem;
+  height: 3rem;
+}
+#info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  margin-left: 0.5rem;
+}
+.date{
+  margin-top: -.5rem;
+}
+.btn-con{
+  color: green;
+}
+.image-container {
+    width: 100%; 
+    height: 300px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+  }
+  
+  .post-image {
+    max-width: 100%;
+    min-height: 100%;
+    object-fit: contain; 
+    border-radius: 8px; 
+  }

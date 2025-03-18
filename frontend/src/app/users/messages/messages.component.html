@@ -1,0 +1,68 @@
+<div class="container mt-1">
+  <div class="row">
+    <!-- User List -->
+    <div class="col-md-3">
+      <div class="card users">
+        <div class="card-header  text-white">
+          Users
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li
+              *ngFor="let user of users"
+              class="list-group-item list-group-item-action"
+              (click)="selectUser(user.id)"
+              [class.active]="receiverId === user.id"
+            >
+              {{ user.firstName }} {{ user.lastName }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Box -->
+    <div class="col-md-9">
+      <div class="card messages">
+        <div class="card-header  text-white">
+          Chat with {{ selectedUserName || 'Select a user' }}
+        </div>
+        <div class="card-body chat-box" style="height: 400px; overflow-y: auto;">
+          <div *ngFor="let msg of messages" class="mb-2">
+            <div
+              [ngClass]="{
+                'text-end': msg.sender_id === senderId,
+                'text-start': msg.sender_id !== senderId
+              }"
+            >
+              <div
+                [ngClass]="{
+                  ' text-dark p-2 rounded': msg.sender_id === senderId,
+                  'bg-light p-2 rounded': msg.sender_id !== senderId
+                }"
+                style="display: inline-block; max-width: 70%;"
+              >
+                {{ msg.message }}
+                <div class="text-muted small">
+                  {{ msg.timestamp | date: 'shortTime' }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Type a message..."
+              [(ngModel)]="message"
+              (keyup.enter)="sendMessage()"
+            />
+            <button class="btn btn-primary" (click)="sendMessage()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

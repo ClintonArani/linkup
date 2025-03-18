@@ -1,0 +1,85 @@
+<div class="container mt-4">
+    <h1>Books Management</h1>
+  
+    <!-- Success and Error Messages -->
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  
+    <!-- Confirmation Message -->
+    <div *ngIf="isConfirmationVisible" class="confirmation-overlay">
+      <div class="confirmation-content">
+        <p>Are you sure you want to delete this resource?</p>
+        <button class="btn btn-danger" (click)="confirmDelete()">Yes</button>
+        <button class="btn btn-secondary ml-2" (click)="cancelDelete()">No</button>
+      </div>
+    </div>
+  
+    <!-- Add Book Button -->
+    <button class="btn btn-primary mb-3" (click)="showForm()">Add a Book</button>
+  
+    <!-- Overlay Form -->
+    <div *ngIf="isFormVisible" class="overlay">
+      <div class="overlay-content">
+        <h2>{{ isEditMode ? 'Edit Resource' : 'Add Resource' }}</h2>
+        <form [formGroup]="resourceForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" formControlName="title" />
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" formControlName="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="number" class="form-control" id="quantity" formControlName="quantity" />
+          </div>
+          <div class="form-group">
+            <label for="file">File</label>
+            <input type="file" class="form-control" id="file" (change)="onFileChange($event, 'file')" />
+            <small *ngIf="resourceForm.get('file')?.value" class="text-muted">
+              Selected File: {{ resourceForm.get('file')?.value.name }}
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" class="form-control" id="image" (change)="onFileChange($event, 'image')" />
+            <small *ngIf="resourceForm.get('image')?.value" class="text-muted">
+              Selected Image: {{ resourceForm.get('image')?.value.name }}
+            </small>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            {{ isEditMode ? 'Update Resource' : 'Add Resource' }}
+          </button>
+          <button type="button" class="btn btn-secondary ml-2" (click)="hideForm()">Cancel</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Resources Table -->
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resource of resources">
+          <td>{{ resource.title }}</td>
+          <td>{{ resource.description }}</td>
+          <td>{{ resource.quantity }}</td>
+          <td>
+            <i class="fas fa-edit m-1 text-primary" (click)="onEdit(resource)"></i>
+            <i class="fas fa-trash-alt m-1 text-danger" (click)="onDelete(resource.id)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

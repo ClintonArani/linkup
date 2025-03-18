@@ -1,0 +1,78 @@
+<div class="container mt-5 d-flex justify-content-center">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="px-5 py-4 shadow-lg w-100 rounded" style="max-width: 500px;">
+      <div class="fs-1 d-flex justify-content-start fw-bold text-capitalize text-info">Login</div>
+  
+      <!-- Success Message -->
+      <div *ngIf="successMessage" class="alert alert-success text-center">
+        {{ successMessage }}
+      </div>
+  
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger text-center">
+        {{ errorMessage }}
+      </div>
+  
+      <div class="row">
+        <!-- Email -->
+        <div class="col-md-12">
+          <div class="form-group position-relative">
+            <label for="email">Email Address</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              id="email" 
+              formControlName="email" 
+              placeholder="Enter your Email Address"
+              [ngClass]="{
+                'is-valid': loginForm.get('email')?.valid && loginForm.get('email')?.touched,
+                'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+              }"
+            >
+            <div class="valid-feedback">✅ Looks good!</div>
+            <div class="invalid-feedback">
+              <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+              <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Password -->
+        <div class="col-md-12">
+          <div class="form-group position-relative">
+            <label for="password">Password</label>
+            <input 
+              type="password" 
+              class="form-control" 
+              id="password" 
+              formControlName="password" 
+              placeholder="Enter your Password"
+              [ngClass]="{
+                'is-valid': loginForm.get('password')?.valid && loginForm.get('password')?.touched,
+                'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched
+              }"
+            >
+            <div class="valid-feedback">✅ Looks good!</div>
+            <div class="invalid-feedback">
+              <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+              <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Submit Button with Loader -->
+      <button type="submit" class="btn btn-primary mt-3 mb-2 w-100" [disabled]="loginForm.invalid || isLoading">
+        <span *ngIf="!isLoading">Login</span>
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+      </button>
+  
+      <!-- Forgot Password & Signup Link -->
+      <div class="text-center mt-2">
+        <a href="/forgot-password" class="text-danger fw-bold">Forgot Password?</a>
+      </div>
+      <div class="text-center mt-2">
+        <span>Don't have an account? <a href="/signup" class="text-info fw-bold">Signup here</a></span>
+      </div>
+    </form>
+  </div>
+  

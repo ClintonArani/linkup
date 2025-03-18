@@ -1,0 +1,44 @@
+### Send Connection Request
+POST http://localhost:9000/connections/send-request
+Content-Type: application/json
+
+{
+  "senderId": "72acc1c3-1fb7-4db8-973a-03db2119e937",
+  "receiverId": "7350cbda-dc3e-4b1e-a57f-99fb106a4db8"
+}
+
+### Accept Connection Request
+PUT http://localhost:9000/connections/update-status/67d74db3-9cb1-4cfc-9522-bfbd5f26d336
+Content-Type: application/json
+
+{
+  "status": "accepted"
+}
+
+### Reject Connection Request
+PUT http://localhost:9000/connections/update-status/7350cbda-dc3e-4b1e-a57f-99fb106a4db8
+Content-Type: application/json
+
+{
+  "status": "rejected"
+}
+
+### Get All Connections for a User
+GET http://localhost:9000/connections/user-connections/7350cbda-dc3e-4b1e-a57f-99fb106a4db8
+Content-Type: application/json
+
+### Get Pending Connection Requests for a User
+GET http://localhost:9000/connections/pending-requests/7350cbda-dc3e-4b1e-a57f-99fb106a4db8
+Content-Type: application/json
+
+### Get a Specific Connection by ID
+GET http://localhost:9000/connections/318b8b91-0d9f-4f15-9a1d-f5a858701b4e
+Content-Type: application/json
+
+### Delete a Connection
+DELETE http://localhost:9000/connections/22aab232-b055-42ab-8944-1de273b51457
+Content-Type: application/json
+
+### Get All Connections (Admin Only)
+GET http://localhost:9000/connections
+Content-Type: application/json

@@ -1,0 +1,72 @@
+### CREATE USER
+POST http://localhost:9000/users/create
+Content-Type: application/json
+
+{
+    "firstName": "Morine",
+    "lastName": "Maina",
+    "phoneNumber": "0795252233",
+    "email": "morineemaina@gmail.com",
+    "password": "Morine@123"
+}
+
+
+### GET ALL USERS
+GET http://localhost:9000/users/all-users
+Content-Type: application/json
+
+
+### LOGIN
+POST http://localhost:9000/auth/login
+Content-Type: application/json
+
+{
+    "email": "clintonarani@gmail.com",
+    "password": "Clinton@123"
+}
+
+
+### GET SINGLE USER
+GET http://localhost:9000/users/3c15ac96-ac37-4fab-85e2-5af8f56c9b86
+Content-Type: application/json
+
+
+### SWITCH ROLES
+PUT http://localhost:9000/users/switch-role
+Content-Type: application/json
+
+{
+    "user_id": "468a9ae9-3eaa-4301-941d-f2712476823f"
+}
+
+
+### UPDATE USER
+PATCH http://localhost:9000/users/update/7350cbda-dc3e-4b1e-a57f-99fb106a4db8
+Content-Type: application/json
+
+{
+    "firstName": "Morinemaina",
+    "lastName": "Maina",
+    "phoneNumber": "0795252233",
+    "email": "morineemaina@gmail.com",
+    "password": "Morine@123"
+}
+
+
+### DELETE USER
+DELETE http://localhost:9000/users/delete/3c15ac96-ac37-4fab-85e2-5af8f56c9b86
+Content-Type: application/json
+
+### SEND A MESSAGE FROM CLINTON TO ANASTACIA
+POST http://localhost:9000/messages/send
+Content-Type: application/json
+
+{
+    "sender_id": "7350cbda-dc3e-4b1e-a57f-99fb106a4db8",
+    "receiver_id": "5cb9c3b0-95c7-45bb-b28f-b188dcfed81f",
+    "message": "Hi Anastacia, how are you doing?"
+}
+
+### GET MESSAGES BETWEEN CLINTON AND ANASTACIA
+GET http://localhost:9000/messages/8db3d7a0-42cc-45e5-8108-4db085fa3d55/468a9ae9-3eaa-4301-941d-f2712476823f
+Content-Type: application/json

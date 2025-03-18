@@ -1,0 +1,5 @@
+CREATE PROCEDURE GetForums
+AS
+BEGIN
+    SELECT * FROM forums;
+END;

@@ -1,0 +1,147 @@
+<!-- Cards -->
+<div class="row my-4">
+  <!-- Total Users -->
+  <div class="col-md-3">
+    <div class="card bg-primary text-white">
+      <div class="card-body">
+        <h5 class="card-title">Total Users</h5>
+        <p class="card-text">{{ totalUsers }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Active Users -->
+  <div class="col-md-3">
+    <div class="card bg-success text-white">
+      <div class="card-body">
+        <h5 class="card-title">Active Users</h5>
+        <p class="card-text">{{ activeUsers }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Inactive Users -->
+  <div class="col-md-3">
+    <div class="card bg-warning text-white">
+      <div class="card-body">
+        <h5 class="card-title">Inactive Users</h5>
+        <p class="card-text">{{ inactiveUsers }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Total Books -->
+  <div class="col-md-3">
+    <div class="card bg-info text-white">
+      <div class="card-body">
+        <h5 class="card-title">Total Books</h5>
+        <p class="card-text">{{ totalBooks }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Second Row of Cards -->
+<div class="row my-4">
+  <!-- Borrowed Books -->
+  <div class="col-md-3">
+    <div class="card bg-secondary text-white">
+      <div class="card-body">
+        <h5 class="card-title">Borrowed Books</h5>
+        <p class="card-text">{{ totalBorrowedBooks }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overdue Books -->
+  <div class="col-md-3">
+    <div class="card bg-danger text-white">
+      <div class="card-body">
+        <h5 class="card-title">Overdue Books</h5>
+        <p class="card-text">{{ totalOverdueBooks }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Total Attachments -->
+  <div class="col-md-3">
+    <div class="card bg-dark text-white">
+      <div class="card-body">
+        <h5 class="card-title">Total Attachments</h5>
+        <p class="card-text">{{ totalAttachments }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Charts -->
+<div class="row my-4">
+  <!-- Books Chart -->
+  <div class="col-md-6">
+    <h3>Books Overview</h3>
+    <div class="chart-container">
+      <canvas id="booksChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Users Chart -->
+  <div class="col-md-6">
+    <h3>Users Overview</h3>
+    <div class="chart-container">
+      <canvas id="usersChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Tables -->
+<div class="row my-4">
+  <!-- Borrowed Books Table -->
+  <div class="col-md-12">
+    <h3>Borrowed Books</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Book</th>
+          <th>Borrowed Date</th>
+          <th>Return Date</th>
+          <th>Is Returned</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of borrowedBooks">
+          <td>{{ book.user }}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.borrowedDate }}</td>
+          <td>{{ book.returnDate }}</td>
+          <td>{{ book.isReturned }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Overdue Books Table -->
+<div class="row my-4">
+  <div class="col-md-12">
+    <h3>Overdue Books</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Book</th>
+          <th>Borrowed Date</th>
+          <th>Overdue Since</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of overdueBooks">
+          <td>{{ book.user }}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.borrowedDate }}</td>
+          <td>{{ book.overdueSince }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

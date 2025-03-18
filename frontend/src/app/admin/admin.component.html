@@ -1,0 +1,67 @@
+<!-- admin.component.html -->
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <div class="sidebar" [class.active]="isSidebarVisible">
+    <div class="sidebar-header">
+      <img src="assets/logo.png" alt="">
+    </div>
+    <ul class="sidebar-tabs">
+      <li routerLink="/admin/dashboard" [class.active]="activeTab === 'overview'" (click)="setActiveTab('overview')">
+        <i class="fas fa-home"></i> Overview
+      </li>
+      <li routerLink="/admin/users" [class.active]="activeTab === 'manageUser'" (click)="setActiveTab('manageUser')">
+        <i class="fas fa-users"></i> Manage User
+      </li>
+      <li routerLink="/admin/books" [class.active]="activeTab === 'books'" (click)="setActiveTab('books')">
+        <i class="fas fa-book"></i> Books
+      </li>
+      <li routerLink="/admin/internships" [class.active]="activeTab === 'postInternships'" (click)="setActiveTab('postInternships')">
+        <i class="fas fa-briefcase"></i> Attachments
+      </li>
+      <li routerLink="/admin/reports" [class.active]="activeTab === 'reportsAnalytics'" (click)="setActiveTab('reportsAnalytics')">
+        <i class="fas fa-chart-line"></i> Reports & Analytics
+      </li>
+      <li (click)="onLogout()">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content" [class.dark-mode]="isDarkMode" (click)="hideSidebarOnOutsideClick()">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-left">
+        <div class="menu-icon" (click)="toggleSidebar($event)" tabindex="0" aria-label="Toggle Sidebar">
+          <i class="fas fa-bars"></i>
+        </div>
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." />
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+      <div class="navbar-right">
+        <div class="theme-toggle" (click)="toggleTheme()">
+          <i [class]="isDarkMode ? 'fas fa-sun' : 'fas fa-moon'"></i>
+        </div>
+        <div class="notification-icon" (click)="showNotifications()">
+          <i class="fas fa-bell"></i>
+          <span class="badge">{{ notificationsCount }}</span>
+        </div>
+        <div class="profile" (click)="toggleProfileDropdown()">
+          <img src="assets/image2.png" alt="Admin Profile" />
+          <span>Admin</span>
+          <div class="dropdown" [class.show]="isProfileDropdownVisible">
+            <a href="#">Settings</a>
+            <a href="#">Help</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <router-outlet/>
+    </div>
+  </div>
+</div>

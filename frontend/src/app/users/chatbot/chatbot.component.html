@@ -1,0 +1,17 @@
+<div class="container chatbot-container">
+    <h2>🤖 AI Chatbot Support</h2>
+  
+    <!-- Chat Window -->
+    <div class="chat-window">
+      <div *ngFor="let msg of chatMessages">
+        <p [ngClass]="{'user-message': msg.sender === 'User', 'bot-message': msg.sender === 'Bot'}">
+          <strong>{{ msg.sender }}:</strong> {{ msg.text }}
+        </p>
+      </div>
+    </div>
+  
+    <!-- User Input -->
+    <input [(ngModel)]="userMessage" class="form-control" placeholder="Ask me anything...">
+    <button class="btn btn-primary mt-2" (click)="sendMessage()">Send</button>
+  </div>
+  

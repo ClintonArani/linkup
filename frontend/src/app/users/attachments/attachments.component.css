@@ -1,0 +1,13 @@
+.card {
+    border-radius: 0.5rem; 
+    transition: transform 0.3s ease-in-out; 
+  }
+  
+  .card:hover {
+    transform: translateY(-10px); /* Card lifts on hover */
+  }
+  
+  .card-body {
+    padding: 1.5rem; /* More padding for the card body */
+  }
+  

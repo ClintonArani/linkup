@@ -1,0 +1,22 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">📑 Attachments</h2>
+
+  <p *ngIf="attachments.length === 0" class="text-center text-muted">No attachments available.</p>
+
+  <div class="row">
+    <div *ngFor="let attachment of attachments" class="col-md-4 col-sm-6 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title text-truncate" title="{{ attachment.title }}">{{ attachment.title }}</h5>
+          <p><strong>Company Name:</strong> {{ attachment.company_name }}</p>
+          <p class="card-text text-muted mb-2">{{ attachment.description }}</p>
+          
+          <!-- Use an anchor tag for external navigation -->
+          <a [href]="attachment.application_link" target="_blank" rel="noopener noreferrer" class="btn btn-primary w-100">
+            Apply Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

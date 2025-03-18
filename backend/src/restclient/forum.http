@@ -1,0 +1,10 @@
+# create forum
+
+POST http://localhost:9000/forums/create
+Content-Type: application/json
+
+{
+    "title": "Web Development",
+    "description": "Discuss web development topics",
+    "iconUrl": "https://example.com/icon.png"
+}

@@ -1,0 +1,114 @@
+<div class="container">
+  <!-- Header Section -->
+  <div class="header">
+    <h2 class="title">📢 Forums & Groups</h2>
+    <button class="btn btn-success" (click)="openCreateForumModal()">Create New Forum</button>
+  </div>
+
+  <!-- Forum List -->
+  <div class="forum-list">
+    <div *ngFor="let forum of forums" class="forum-card" (click)="openChatModal(forum)">
+      <div class="card-body">
+        <!-- Forum Icon -->
+        <div class="forum-icon">
+          <img [src]="forum.groupIcon || 'assets/default-icon.png'" alt="" class="forum-icon-img">
+        </div>
+        <!-- Forum Title and Description -->
+        <h5 class="forum-title">{{ forum.title }}</h5>
+        <p class="forum-description">{{ forum.description }}</p>
+
+        <!-- Members Info -->
+        <div class="members-info">
+          <p><strong>{{ forum.members.length }} Members</strong></p>
+          <div class="member-previews">
+            <div *ngFor="let member of forum.members.slice(0, 3)" class="member-profile">
+              <div class="member-avatar">
+                <img [src]="member.profilePictureUrl" alt="" class="avatar-img">
+              </div>
+              <p>{{ member.name }}</p>
+            </div>
+            <p *ngIf="forum.members.length > 3">+{{ forum.members.length - 3 }} more</p>
+          </div>
+        </div>
+
+        <!-- Join Button -->
+        <button class="btn btn-primary" (click)="joinForum(forum.title); $event.stopPropagation()">Join</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Forum Modal -->
+  <div *ngIf="isCreateForumModalVisible" class="modal fade show" style="display: block; background-color: rgba(0, 0, 0, 0.5);" tabindex="-1" role="dialog" aria-labelledby="createForumModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center">
+          <h5 class="modal-title" id="createForumModalLabel">Create a New Forum</h5>
+          <button type="button" class="close ml-auto" (click)="closeCreateForumModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="createForum()">
+            <div class="form-group">
+              <label for="forumTitle">Forum Title</label>
+              <input id="forumTitle" [(ngModel)]="newForum.title" name="title" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="forumDescription">Forum Description</label>
+              <textarea id="forumDescription" [(ngModel)]="newForum.description" name="description" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="forumIconFile">Upload Forum Icon</label>
+              <input type="file" id="forumIconFile" (change)="onIconFileChange($event)" class="form-control" />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="closeCreateForumModal()">Cancel</button>
+              <button type="submit" class="btn btn-success">Create Forum</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Chat Modal -->
+<div *ngIf="isChatModalVisible" class="modal fade show" style="display: block; background-color: rgba(0, 0, 0, 0.5);" tabindex="-1" role="dialog" aria-labelledby="chatModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-between align-items-center">
+        <h5 class="modal-title" id="chatModalLabel">Chat - {{ selectedForum?.title }}</h5>
+        <button type="button" class="close ml-auto" (click)="closeChatModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Chat Messages -->
+        <div class="chat-box">
+          <div *ngFor="let message of chatMessages" class="message" [ngClass]="{'my-message': message.sender.name === 'User', 'other-message': message.sender.name !== 'User'}">
+            <div class="message-header">
+              <img [src]="message.sender.profilePictureUrl" alt="" class="avatar-img">
+              <span class="sender-name">{{ message.sender.name }}</span>
+            </div>
+            <div class="message-content">
+              <p>{{ message.content }}</p>
+              <!-- Display File as Clickable Link -->
+              <div *ngIf="message.fileUrl" class="message-file">
+                <a [href]="message.fileUrl" target="_blank" class="file-link">
+                  <span class="file-icon">📄</span> {{ message.fileName }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="chat-input">
+          <input type="text" [(ngModel)]="newMessage" placeholder="Type your message..." class="form-control" />
+          <input type="file" (change)="onFileChange($event)" class="form-control" />
+          <button class="btn btn-primary" (click)="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

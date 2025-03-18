@@ -1,0 +1,60 @@
+<div class="container mt-4">
+  <!-- Message Div -->
+  <div *ngIf="message.text" class="alert" [ngClass]="{'alert-success': message.type === 'success', 'alert-danger': message.type === 'error'}" role="alert">
+    {{ message.text }}
+    <button type="button" class="btn-close" (click)="clearMessage()" aria-label="Close"></button>
+  </div>
+
+  <h2 class="text-center mb-4">🔔 Connection Requests</h2>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Notifications List -->
+  <div *ngIf="!isLoading" class="row">
+    <div *ngFor="let notification of notifications" class="col-md-6 col-lg-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column align-items-center text-center p-4">
+          <!-- Profile Image -->
+          <img
+            [src]="notification.sender.profile || 'assets/default-profile.png'"
+            alt="Profile Image"
+            class="student-img mb-3"
+          />
+    
+          <!-- Sender's Name -->
+          <h5 class="card-title mb-2">{{ notification.sender.firstName }} {{ notification.sender.lastName }}</h5>
+    
+          <!-- Sender's Email -->
+          <p class="card-text text-muted mb-1">
+            <strong>Email:</strong> {{ notification.sender.email }}
+          </p>
+    
+          <!-- Sender's Profession -->
+          <p class="card-text text-muted mb-3">
+            <strong>Profession:</strong> {{ notification.sender.profession }}
+          </p>
+    
+          <!-- Buttons for Accept and Reject -->
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-success btn-sm me-md-2" (click)="acceptConnection(notification.id)">
+              <i class="fas fa-check"></i> Accept
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="rejectConnection(notification.id)">
+              <i class="fas fa-times"></i> Reject
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Notifications Found -->
+  <div *ngIf="!isLoading && notifications.length === 0" class="text-center">
+    <p class="text-muted">No connection requests found.</p>
+  </div>
+</div>
