@@ -1,5 +1,23 @@
-<div class="container">
-    <h2>📈 Reports & Analytics</h2>
-    <canvas id="usageChart"></canvas>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Reports</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Report Title</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let report of reports">
+            <td>{{ report.title }}</td>
+            <td>
+              <button class="btn btn-primary" (click)="generatePdf(report)">Generate PDF</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  
+</div>

@@ -1,13 +1,12 @@
 CREATE TABLE forum_messages (
     id VARCHAR(255) PRIMARY KEY,
-    forumId VARCHAR(255) NOT NULL,
-    senderId VARCHAR(255) NOT NULL,
-    message TEXT NOT NULL,
-    fileUrl VARCHAR(255),
-    fileName VARCHAR(255),
-    sentAt DATETIME NOT NULL,
-    FOREIGN KEY (forumId) REFERENCES forums(id),
-    FOREIGN KEY (senderId) REFERENCES users(id)
+    forum_id VARCHAR(255) NOT NULL,
+    sender_id VARCHAR(255) NOT NULL,
+    message TEXT,
+    file_url VARCHAR(255),
+    file_name VARCHAR(255),
+    sent_at DATETIME NOT NULL,
+    FOREIGN KEY (forum_id) REFERENCES forums(id),
+    FOREIGN KEY (sender_id) REFERENCES users(id)
 );
 
-drop table forum_messages

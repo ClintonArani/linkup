@@ -1,10 +1,8 @@
 CREATE TABLE forum_members (
     id VARCHAR(255) PRIMARY KEY,
-    forumId VARCHAR(255) NOT NULL,
-    userId VARCHAR(255) NOT NULL,
-    joinedAt DATETIME NOT NULL,
-    FOREIGN KEY (forumId) REFERENCES forums(id),
-    FOREIGN KEY (userId) REFERENCES users(id)
+    forum_id VARCHAR(255) NOT NULL,
+    user_id VARCHAR(255) NOT NULL,
+    joined_at DATETIME NOT NULL,
+    FOREIGN KEY (forum_id) REFERENCES forums(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
-
-drop table forum_members

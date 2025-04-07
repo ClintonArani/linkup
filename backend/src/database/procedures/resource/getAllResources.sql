@@ -1,12 +1,10 @@
-CREATE OR ALTER PROCEDURE getAllResources
+CREATE PROCEDURE getAllResources
 AS
 BEGIN
     SELECT 
         id, 
         title, 
         description, 
-        filePath, 
-        imagePath, 
         createdAt,
         quantity, 
         updatedAt 
@@ -14,3 +12,4 @@ BEGIN
     WHERE isDeleted = 0;
 END;
 
+drop procedure getAllResources

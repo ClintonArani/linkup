@@ -1,0 +1,117 @@
+### 1. CREATE POST (TEXT ONLY)
+POST http://localhost:9000/posts/create
+Content-Type: application/json
+
+{
+    "user_id": "3efe4737-cbfa-425a-9391-469266d96234",
+    "content": "This is my first post about technology trends!"
+}
+
+### 2. CREATE POST (WITH IMAGE)
+POST http://localhost:9000/posts/create
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary1234
+
+------WebKitFormBoundary1234
+Content-Disposition: form-data; name="user_id"
+
+3efe4737-cbfa-425a-9391-469266d96234
+------WebKitFormBoundary1234
+Content-Disposition: form-data; name="content"
+
+Check out this cool tech image!
+------WebKitFormBoundary1234
+Content-Disposition: form-data; name="image"; filename="bill.jpg"
+Content-Type: image/jpeg
+
+< ./tech-image.jpg
+------WebKitFormBoundary1234--
+
+### 3. GET ALL POSTS
+GET http://localhost:9000/posts/all
+Content-Type: application/json
+
+### 4. GET SINGLE POST
+GET http://localhost:9000/posts/ebce3681-35e8-449d-8fbc-2763c5e88119
+Content-Type: application/json
+
+### 5. UPDATE POST (TEXT)
+PUT http://localhost:9000/posts/ebce3681-35e8-449d-8fbc-2763c5e88119
+Content-Type: application/json
+
+{
+    "user_id": "08f365d6-6f80-40e4-a700-b540fcc2b4ba",
+    "content": "Updated post content about AI"
+}
+
+### 6. UPDATE POST (WITH IMAGE)
+POST http://localhost:9000/posts/ebce3681-35e8-449d-8fbc-2763c5e88119/upload-image
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary1234
+
+------WebKitFormBoundary1234
+Content-Disposition: form-data; name="user_id"
+
+08f365d6-6f80-40e4-a700-b540fcc2b4ba
+------WebKitFormBoundary1234
+Content-Disposition: form-data; name="content"
+
+Updated with new AI image!
+------WebKitFormBoundary1234
+Content-Disposition: form-data; name="image"; filename="ai.jpg"
+Content-Type: image/jpeg
+
+< ./ai-image.jpg
+------WebKitFormBoundary1234--
+
+### 7. DELETE POST
+DELETE http://localhost:9000/posts/8e4b0c86-99a0-4137-938b-553afc5b4cef
+Content-Type: application/json
+
+{
+    "user_id": "08f365d6-6f80-40e4-a700-b540fcc2b4ba"
+}
+
+### 8. LIKE A POST
+POST http://localhost:9000/posts/3e899885-a372-435f-9e06-0a12ea2b214b/like
+Content-Type: application/json
+
+{
+    "user_id": "08f365d6-6f80-40e4-a700-b540fcc2b4ba"
+}
+
+### 9. UNLIKE A POST
+DELETE http://localhost:9000/posts/3e899885-a372-435f-9e06-0a12ea2b214b/like
+Content-Type: application/json
+
+{
+    "user_id": "08f365d6-6f80-40e4-a700-b540fcc2b4ba"
+}
+
+### 10. ADD COMMENT
+POST http://localhost:9000/posts/3e899885-a372-435f-9e06-0a12ea2b214b/comments
+Content-Type: application/json
+
+{
+    "user_id": "08f365d6-6f80-40e4-a700-b540fcc2b4ba",
+    "content": "This is an insightful post!"
+}
+
+### 11. UPDATE COMMENT
+PUT http://localhost:9000/posts/comments/7ff8bc37-8fb6-431e-b648-08c74d08374a
+Content-Type: application/json
+
+{
+    "user_id": "08f365d6-6f80-40e4-a700-b540fcc2b4ba",
+    "content": "Updated my comment with more thoughts"
+}
+
+### 12. DELETE COMMENT
+DELETE http://localhost:9000/posts/comments/7ff8bc37-8fb6-431e-b648-08c74d08374a
+Content-Type: application/json
+
+{
+    "user_id": "08f365d6-6f80-40e4-a700-b540fcc2b4ba"
+}
+
+### GET ALL COMMENTS FOR A SPECIFIC POST
+GET http://localhost:9000/posts/3e899885-a372-435f-9e06-0a12ea2b214b/comments
+Content-Type: application/json

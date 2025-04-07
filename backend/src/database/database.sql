@@ -1,1 +1,3 @@
-CREATE database event_management
+CREATE database linkup
+
+select * from users

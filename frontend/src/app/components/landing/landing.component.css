@@ -1,0 +1,333 @@
+.home{
+    width: 100%;
+    box-sizing: border-box;
+}
+.homeSection > .top{
+    background-image: url("../../../../public/assets/slider-7.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-height: 100vh;
+    width: 100%;
+    margin-top: -1rem;
+    padding-left: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+.homeSection > .top > h1{
+    color: white;
+    padding-top: 2rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+.homeSection > .top > p{
+    color: white;
+    padding-top: 1rem;
+    text-transform: capitalize;
+    font-size: large;
+}
+.homeSection > .top > button{
+    width: 8rem;
+    height: 2.3rem;
+    background-color: #ff0000;
+    margin-top: 2rem;
+    border: none;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-weight: bold;
+
+}
+.homeSection > .bottom{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px; 
+}
+.card-container{
+    perspective: 1000px;
+    width: 380px;
+    height: 250px;
+}
+.card{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    border-radius: 10px;
+}
+.card-container:hover .card {
+    transform: rotateY(180deg);
+}
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background-color: #ffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+i{
+    color: red;
+    font-size: 2rem;
+}
+
+.card-front {
+  background-color: #1f3f6a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h3{
+    margin: 0 auto;
+    color: white;
+    text-transform: capitalize;
+    margin-top: 1rem;
+  }
+  p{
+    color: white;
+    margin: 0 auto;
+  }
+}
+
+.card-back {
+  background-color: #1f3f6a;
+  transform: rotateY(180deg);
+  button{
+    background-color: transparent;
+    width: 8rem;
+    height: 2.5rem;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: medium;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all ease-in-out 0.5s;
+    border-radius: 2rem;
+    border: 2px solid white;
+  }
+  h3{
+    color: white;
+  }
+  p{
+    color: white;
+  }
+  button:hover{
+    background-color: red;
+    border: none;
+  }
+}
+
+/* about section */
+.about{
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.right h6{
+    text-transform: uppercase;
+    color: #505050;
+}
+.right h3{
+    text-transform: capitalize;
+}
+.right button{
+    width: 8rem;
+    height: 2.5rem;
+    border: none;
+    background-color: #ff0000;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+}
+/* course section */
+.course{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.course > .para{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 4rem;
+}
+.course > .para .left h2{
+    text-transform: capitalize;
+}
+.course > .para button{
+    width: 8rem;
+    height: 2.5rem;
+    border: 2px solid #ff0000;
+    cursor: pointer;
+    font-size: large;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: #ff0000;
+    transition: all ease-in-out 0.5s;
+}
+.para button:hover{
+    border: none;
+    color: #fff;
+    background-color: #ff0000;
+}
+.cards{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+.card1{
+    box-shadow: 1px 0 4px #ccc;
+    border-radius: 10px;
+    width: 24rem;
+}
+.card1 > .top{
+    width: 20rem;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.card1 > .top > img{
+    width: 24rem;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.card1 > .bottom {
+    display: flex;
+    flex-direction: column;
+}
+.bottom > img{
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-top: -2rem;
+    width: 4rem;
+}
+.bottom > h3{
+    text-align: center;
+    text-transform: capitalize;
+}
+.bottom > p{
+    text-align: center;
+}
+.bottom > .icons{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.bottom > .icons > span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -1rem;
+    gap: 5px;
+}
+.bottom > .icons > span i{
+    font-size: normal;
+    color: #505050;
+}
+.bottom > .icons > span i:hover{
+    color: #ff0000;
+}
+.bottom > .icons > span > p{
+    margin-top: 1.2rem;
+}
+
+/* services section */
+.services{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+.services > .service {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 2rem;
+}
+.services > .service > .left > div {
+    display: flex;
+    justify-content: start;
+    gap: 1rem;
+}
+.services > .service > .left > div > i{
+    margin-top: .4rem;
+}
+.services > .service > .left > div > i:hover{
+    color: #0d2f5d;
+}
+
+
+.services > .service > .right > div {
+    display: flex;
+    justify-content: start;
+    gap: 1rem;
+}
+.services > .service > .right > div > i{
+    margin-top: .4rem;
+}
+.services > .service > .right > div > i:hover{
+    color: #0d2f5d;
+}
+
+/* contact section */
+.contact{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../../../public/assets/contact.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+form{
+    width: 50%;
+}
+form > .input{
+    display: flex;
+    margin: 1rem;
+}
+textarea{
+    margin: 0 auto;
+    width: 20rem;
+    background-color: transparent;
+    outline: none;
+}
+form > .input input{
+    width: 20rem;
+    margin: 0 auto;
+    background-color: transparent;
+    padding-left: 10px;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    color: white;
+}
+::placeholder{
+    color: white;
+    font-weight: bold;
+}
+form > .input input:focus{
+    outline: none;
+}

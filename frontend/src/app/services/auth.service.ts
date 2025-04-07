@@ -89,4 +89,20 @@ export class AuthService {
     }
     return null;
   }
+  getUserFullName(): string {
+    const token = this.getToken(); // Get token from localStorage
+    if (token) {
+      const decodedToken: any = jwtDecode(token); // Decode JWT
+      return `${decodedToken.firstName} ${decodedToken.lastName}`; // Return full name
+    }
+    return 'User';
+  }
+  getUserFirstName(): string {
+    const token = this.getToken(); 
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      return `${decodedToken.firstName}`;
+    }
+    return 'User'; 
+  }
 }

@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "firstName": "Morine",
     "lastName": "Maina",
-    "phoneNumber": "0795252233",
+    "phoneNumber": "0795598227",
     "email": "morineemaina@gmail.com",
     "password": "Morine@123"
 }
@@ -21,13 +21,13 @@ POST http://localhost:9000/auth/login
 Content-Type: application/json
 
 {
-    "email": "clintonarani@gmail.com",
-    "password": "Clinton@123"
+    "email": "morineemaina@gmail.com",
+    "password": "Morine@123"
 }
 
 
 ### GET SINGLE USER
-GET http://localhost:9000/users/3c15ac96-ac37-4fab-85e2-5af8f56c9b86
+GET http://localhost:9000/users/2a5ff752-ffb4-4546-ae17-1ce07666be9d
 Content-Type: application/json
 
 
@@ -36,12 +36,12 @@ PUT http://localhost:9000/users/switch-role
 Content-Type: application/json
 
 {
-    "user_id": "468a9ae9-3eaa-4301-941d-f2712476823f"
+    "user_id": "fc5b236e-cd66-4834-b1f6-ffd8f4c7f97a"
 }
 
 
 ### UPDATE USER
-PATCH http://localhost:9000/users/update/7350cbda-dc3e-4b1e-a57f-99fb106a4db8
+PATCH http://localhost:9000/users/update/fc5b236e-cd66-4834-b1f6-ffd8f4c7f97a
 Content-Type: application/json
 
 {
@@ -69,4 +69,28 @@ Content-Type: application/json
 
 ### GET MESSAGES BETWEEN CLINTON AND ANASTACIA
 GET http://localhost:9000/messages/8db3d7a0-42cc-45e5-8108-4db085fa3d55/468a9ae9-3eaa-4301-941d-f2712476823f
+Content-Type: application/json
+
+### UPLOAD PROFILE IMAGE
+POST http://localhost:9000/users/2a5ff752-ffb4-4546-ae17-1ce07666be9d/upload-profile
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary1234
+
+------WebKitFormBoundary1234
+Content-Disposition: form-data; name="profileImage"; filename="bill.jpg"
+Content-Type: image/jpeg
+
+< ./new-profile.jpg
+------WebKitFormBoundary1234--
+### UPDATE PROFILE DETAILS
+PUT http://localhost:9000/users/08f365d6-6f80-40e4-a700-b540fcc2b4ba/profile
+Content-Type: application/json
+
+{
+"bio": "Software Developer | Tech Enthusiast",
+"profession": "Software Engineer",
+"university": "University of Nairobi"
+}
+
+### GET PROFILE DETAILS
+GET http://localhost:9000/users/08f365d6-6f80-40e4-a700-b540fcc2b4ba/profile
 Content-Type: application/json

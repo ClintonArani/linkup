@@ -13,9 +13,7 @@
       <li routerLink="/user/messages" [class.active]="activeTab === 'messages'" (click)="setActiveTab('messages')">
         <i class="fas fa-comments"></i> Messages
       </li>
-      <li routerLink="/user/forum" [class.active]="activeTab === 'forums'" (click)="setActiveTab('forums')">
-        <i class="fas fa-bullhorn"></i> Forums
-      </li>
+      
       <li routerLink="/user/connections" [class.active]="activeTab === 'connections'" (click)="setActiveTab('connections')">
         <i class="fas fa-link"></i> Connections
       </li>
@@ -28,9 +26,6 @@
       <li routerLink="/user/mynetwork" [class.active]="activeTab === 'mynetwork'" (click)="setActiveTab('mynetwork')">
         <i class="fas fa-chart-line"></i> My Network
       </li>
-      <li routerLink="/user/chatbot" [class.active]="activeTab === 'chatbot'" (click)="setActiveTab('chatbot')">
-        <i class="fas fa-rocket"></i> Chatbot
-      </li>
       <li (click)="onLogout()">
         <i class="fas fa-sign-out-alt"></i> Logout
       </li>
@@ -41,26 +36,23 @@
   <div class="main-content" [class.dark-mode]="isDarkMode" (click)="hideSidebarOnOutsideClick()">
     <!-- Navbar -->
     <nav class="navbar">
-      <div class="navbar-left">
-        <div class="menu-icon" (click)="toggleSidebar($event)" tabindex="0" aria-label="Toggle Sidebar">
+      <div class="navbar-left d-flex flex-column align-items-start">
+        <div class="menu-icon" (click)="toggleSidebar($event)">
           <i class="fas fa-bars"></i>
         </div>
-        <div class="search-bar">
-          <input type="text" placeholder="Search..." />
-          <i class="fas fa-search"></i>
+        <div class="welcome">
+          <h2>Welcome {{firstName}}</h2>
         </div>
       </div>
       <div class="navbar-right">
-        <div class="theme-toggle" (click)="toggleTheme()">
-          <i [class]="isDarkMode ? 'fas fa-sun' : 'fas fa-moon'"></i>
-        </div>
-        <div  routerLink="/user/notifications" class="notification-icon">
-          <i class="fas fa-bell"></i>
-          <span class="badge">{{ notificationsCount }}</span>
-        </div>
-        <div class="profile" (click)="toggleProfileDropdown()">
-          <img src="assets/image1.png" alt="Admin Profile" />
-          <span>user</span>
+        <div class="profile d-flex flex-column" (click)="toggleProfileDropdown()">
+          <div class="profile-image-container">
+            <img [src]="profileImage" 
+                 alt="User Profile" 
+                 (error)="handleImageError($event)"
+                 class="profile-image">
+          </div>
+          <span>{{ userName }}</span>
           <div class="dropdown" [class.show]="isProfileDropdownVisible">
             <a routerLink="/user/profile">My profile</a>
             <a href="#">Help</a>

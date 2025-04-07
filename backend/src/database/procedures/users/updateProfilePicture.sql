@@ -1,4 +1,4 @@
-CREATE PROCEDURE updateProfilePicture
+CREATE OR ALTER PROCEDURE updateProfilePicture
     @user_id VARCHAR (255),
     @profile VARCHAR(255)
 AS

@@ -4,37 +4,20 @@ import { sqlConfig } from '../config/sqlConfig';
 import { BorrowedBook, Resource } from '../interfaces/resource';
 
 export class ResourceService {
-    async addResource(resource: Resource, file: any, image: any) {
+    async addResource(resource: Resource) {
         let pool = await mssql.connect(sqlConfig);
         let resource_id = v4();
         let createdAt = new Date();
-    
-        // Save file and image to the uploads folder
-        const filePath = `uploads/resources/${file.name}`;
-        const imagePath = `uploads/images/${image.name}`;
-    
-        try {
-            await file.mv(filePath); // Await file upload
-            await image.mv(imagePath); // Await image upload
-        } catch (err) {
-            throw new Error("Failed to save file or image");
-        }
-    
-        // Update the resource object with filePath and imagePath
-        resource.filePath = filePath;
-        resource.imagePath = imagePath;
-    
+
         if (pool.connected) {
             let result = (await pool.request()
                 .input("id", mssql.VarChar, resource_id)
                 .input("title", mssql.VarChar, resource.title)
                 .input("description", mssql.Text, resource.description)
-                .input("filePath", mssql.VarChar, resource.filePath)
-                .input("imagePath", mssql.VarChar, resource.imagePath)
-                .input("quantity", mssql.Int, resource.quantity) // Add quantity
+                .input("quantity", mssql.Int, resource.quantity)
                 .input("createdAt", mssql.DateTime, createdAt)
                 .execute("addResource")).rowsAffected;
-    
+
             if (result[0] == 1) {
                 return {
                     message: "Resource added successfully"
@@ -51,45 +34,19 @@ export class ResourceService {
         }
     }
 
-    async editResource(resource_id: string, updatedResource: Partial<Resource>, file?: any, image?: any) {
+    async editResource(resource_id: string, updatedResource: Partial<Resource>) {
         let pool = await mssql.connect(sqlConfig);
-    
-        let filePath, imagePath;
-    
-        if (file) {
-            filePath = `uploads/resources/${file.name}`;
-            try {
-                await file.mv(filePath); // Await file upload
-            } catch (err) {
-                console.error(`Error saving file: ${err}`);
-                throw new Error("Failed to save file");
-            }
-        }
-    
-        if (image) {
-            imagePath = `uploads/images/${image.name}`;
-            try {
-                await image.mv(imagePath); // Await image upload
-            } catch (err) {
-                console.error(`Error saving image: ${err}`);
-                throw new Error("Failed to save image");
-            }
-        }
-    
+
         if (pool.connected) {
             try {
                 let result = (await pool.request()
                     .input("id", mssql.VarChar, resource_id)
                     .input("title", mssql.VarChar, updatedResource.title)
                     .input("description", mssql.Text, updatedResource.description)
-                    .input("filePath", mssql.VarChar, filePath)
-                    .input("imagePath", mssql.VarChar, imagePath)
                     .input("quantity", mssql.Int, updatedResource.quantity)
                     .input("updatedAt", mssql.DateTime, new Date())
                     .execute("updateResource")).rowsAffected;
-    
-                console.log(`Rows affected: ${result[0]}`); // Log rows affected
-    
+
                 if (result[0] == 1) {
                     return {
                         message: "Resource updated successfully"

@@ -1,142 +1,112 @@
-<div class="container my-5">
-  <!-- Profile Header -->
-  <div class="text-center mb-4">
-    <h2 class="display-4">👤 Profile</h2>
-  </div>
+<div class="profile-container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card profile-card">
+        <div class="card-body">
+          <!-- Loading State -->
+          <div *ngIf="isLoading" class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading profile...</p>
+          </div>
 
-  <!-- Profile Picture & Update Button -->
-  <div class="text-center mb-4">
-    <img [src]="user.profilePicture" alt="Profile Picture" class="rounded-circle border shadow-lg" width="150" height="150">
-    <br>
-    <button class="btn btn-primary mt-3" (click)="openUpdateProfileModal()">
-      <i class="fas fa-edit"></i> Update Profile
-    </button>
-  </div>
+          <!-- Error State -->
+          <div *ngIf="error && !isLoading" class="alert alert-danger">
+            {{ error }}
+            <button class="btn btn-sm btn-outline-danger ms-2" (click)="loadUserProfile()">Retry</button>
+          </div>
 
-  <!-- Profile Details -->
-  <div class="card mb-4 shadow-sm">
-    <div class="card-body">
-      <h4 class="card-title mb-4">📌 Your Profile Information</h4>
-      <div class="row">
-        <div class="col-md-6">
-          <p><strong>Name:</strong> {{ user.firstName }} {{ user.middleName }} {{ user.lastName }}</p>
-          <p><strong>Email:</strong> {{ user.email }}</p>
-          <p><strong>Bio:</strong> {{ user.bio }}</p>
+          <!-- Profile Content -->
+          <div *ngIf="user && !isLoading" class="profile-content">
+            <!-- Profile Header -->
+            <div class="profile-header mb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <h2 class="profile-title">
+                  {{ user.firstName }} {{ user.lastName }}
+                  <span class="badge text-primary ms-2">{{ user.role }}</span>
+                </h2>
+                <button class="btn btn-outline-primary" (click)="toggleEditMode()">
+                  {{ editMode ? 'Cancel' : 'Edit Profile' }}
+                </button>
+              </div>
+              <p class="text-muted mb-0">{{ user.profession || 'No profession specified' }}</p>
+            </div>
+
+            <div class="row">
+              <!-- Profile Picture Column -->
+              <div class="col-md-4 text-center">
+                <div class="profile-image-container mb-3">
+                  <img [src]="user.profile" 
+                       (error)="handleImageError($event)"
+                       alt="Profile Picture" 
+                       class="profile-image img-thumbnail">
+                  <div *ngIf="editMode" class="image-upload-overlay">
+                    <label class="btn btn-sm btn-light">
+                      Change Photo
+                      <input type="file" 
+                             accept="image/*" 
+                             style="display: none;" 
+                             (change)="onFileSelected($event)">
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Bio Section -->
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">About</h5>
+                    <div *ngIf="!editMode">
+                      <p class="card-text">{{ user.bio || 'No bio available' }}</p>
+                    </div>
+                    <div *ngIf="editMode">
+                      <textarea class="form-control" [(ngModel)]="editedUser.bio" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Profile Details Column -->
+              <div class="col-md-8">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Personal Information</h5>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span class="text-muted">Email</span>
+                        <span>{{ user.email }}</span>
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span class="text-muted">University</span>
+                        <span *ngIf="!editMode">{{ user.university || 'Not specified' }}</span>
+                        <input *ngIf="editMode" type="text" class="form-control form-control-sm" 
+                               [(ngModel)]="editedUser.university">
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span class="text-muted">Profession</span>
+                        <span *ngIf="!editMode">{{ user.profession || 'Not specified' }}</span>
+                        <input *ngIf="editMode" type="text" class="form-control form-control-sm" 
+                               [(ngModel)]="editedUser.profession">
+                      </li>
+                      
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span class="text-muted">Last Updated</span>
+                        <span>{{ formatDate(user.updatedAt) }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Edit Mode Actions -->
+                <div *ngIf="editMode" class="d-flex justify-content-end gap-2">
+                  <button class="btn btn-outline-secondary" (click)="toggleEditMode()">Cancel</button>
+                  <button class="btn btn-primary" (click)="saveProfile()">Save Changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-md-6">
-          <p><strong>Professionalism:</strong> {{ user.professionalism }}</p>
-          <p><strong>Role:</strong> {{ user.role }}</p>
-          <p><strong>Age:</strong> {{ user.age }}</p>
-          <p><strong>University:</strong> {{ user.university }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Forums Joined -->
-  <div class="card mb-4 shadow-sm">
-    <div class="card-body">
-      <h4 class="card-title mb-4">👥 Forums & Groups</h4>
-      <ul class="list-group">
-        <li *ngFor="let forum of forums" class="list-group-item d-flex justify-content-between align-items-center">
-          {{ forum }}
-          <span class="badge bg-primary rounded-pill">Member</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Connections -->
-  <div class="card mb-4 shadow-sm">
-    <div class="card-body">
-      <h4 class="card-title mb-4">🔗 Connections</h4>
-      <p class="lead">You have <strong>{{ connections }}</strong> connections.</p>
-    </div>
-  </div>
-
-  <!-- Applied Attachments & Internships -->
-  <div class="card mb-4 shadow-sm">
-    <div class="card-body">
-      <h4 class="card-title mb-4">📑 Applied Attachments & Internships</h4>
-      <ul class="list-group">
-        <li *ngFor="let job of appliedInternships" class="list-group-item d-flex justify-content-between align-items-center">
-          <div>
-            <strong>{{ job.title }}</strong> at {{ job.company }}
-          </div>
-          <span class="badge bg-success rounded-pill">Applied</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- Bootstrap Modal for Updating Profile -->
-<div class="modal fade" id="updateProfileModal" tabindex="-1" aria-labelledby="updateProfileModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="updateProfileModalLabel">Update Profile</h5>
-        <button type="button" class="btn-close" (click)="closeUpdateProfileModal()" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form (ngSubmit)="updateProfile()">
-          <!-- Profile Picture Upload -->
-          <div class="text-center mb-4">
-            <img [src]="user.profilePicture" alt="Profile Picture" class="rounded-circle border shadow-sm" width="100" height="100">
-            <input type="file" class="form-control mt-2" (change)="onFileSelected($event)">
-          </div>
-
-          <div class="row g-3">
-            <div class="col-md-4">
-              <label>First Name</label>
-              <input type="text" class="form-control" [(ngModel)]="user.firstName" name="firstName" placeholder="Enter first name" required>
-            </div>
-            <div class="col-md-4">
-              <label>Middle Name</label>
-              <input type="text" class="form-control" [(ngModel)]="user.middleName" name="middleName" placeholder="Enter middle name">
-            </div>
-            <div class="col-md-4">
-              <label>Last Name</label>
-              <input type="text" class="form-control" [(ngModel)]="user.lastName" name="lastName" placeholder="Enter last name" required>
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label>Email</label>
-            <input type="email" class="form-control" [(ngModel)]="user.email" name="email" placeholder="Enter email" required>
-          </div>
-
-          <div class="mb-3">
-            <label>Bio</label>
-            <textarea class="form-control" [(ngModel)]="user.bio" name="bio" rows="3" placeholder="Write about yourself"></textarea>
-          </div>
-
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label>Professionalism</label>
-              <input type="text" class="form-control" [(ngModel)]="user.professionalism" name="professionalism" placeholder="Enter profession">
-            </div>
-            <div class="col-md-6">
-              <label>Role</label>
-              <input type="text" class="form-control" [(ngModel)]="user.role" name="role" placeholder="Enter your role (e.g., Engineer, Designer)">
-            </div>
-          </div>
-
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label>Age</label>
-              <input type="number" class="form-control" [(ngModel)]="user.age" name="age" placeholder="Enter age">
-            </div>
-            <div class="col-md-6">
-              <label>University</label>
-              <input type="text" class="form-control" [(ngModel)]="user.university" name="university" placeholder="Enter university">
-            </div>
-          </div>
-
-          <button type="submit" class="btn btn-success mt-4 w-100">
-            <i class="fas fa-save"></i> Save Changes
-          </button>
-        </form>
       </div>
     </div>
   </div>

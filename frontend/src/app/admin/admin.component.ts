@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
@@ -10,16 +10,28 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit{
   activeTab: string = 'overview';
   isSidebarVisible: boolean = false;
   isDarkMode: boolean = false;
   isProfileDropdownVisible: boolean = false;
   notificationsCount: number = 3;
   isLoading: boolean = false;
+  userName: string = 'User'; // Default name
 
   constructor(private authService: AuthService) {}
+  
+  ngOnInit() {
+    this.userName = this.authService.getUserFullName();
+    this.simulateLoading();
+  }
 
+  getUserName() {
+    const name = this.authService.getUserIdFromToken();
+    if (name) {
+      this.userName = name;
+    }
+  }
   onLogout() {
     this.authService.logout().subscribe({
       next: (response) => {
@@ -54,18 +66,12 @@ export class AdminComponent {
     }
   }
 
-  toggleTheme() {
-    this.isDarkMode = !this.isDarkMode;
-  }
 
   toggleProfileDropdown() {
     this.isProfileDropdownVisible = !this.isProfileDropdownVisible;
   }
 
-  showNotifications() {
-    alert(`You have ${this.notificationsCount} new notifications.`);
-  }
-
+ 
   // Simulate loading state
   simulateLoading() {
     this.isLoading = true;
@@ -74,17 +80,8 @@ export class AdminComponent {
     }, 2000);
   }
 
-  // Simulate real-time notifications
-  simulateRealTimeNotifications() {
-    setInterval(() => {
-      this.notificationsCount = Math.floor(Math.random() * 10);
-    }, 5000);
-  }
 
-  ngOnInit() {
-    this.simulateLoading();
-    this.simulateRealTimeNotifications();
-  }
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {

@@ -1,10 +1,97 @@
-# create forum
+### CREATE FORUM
+POST http://localhost:9000/api/create
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
-POST http://localhost:9000/forums/create
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Web Development Enthusiasts
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+A place for web developers to discuss new trends, frameworks, and best practices.
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="created_by"
+
+fc5b236e-cd66-4834-b1f6-ffd8f4c7f97a
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="icon"; filename="ceo.png"
+Content-Type: image/png
+
+< ./path/to/ceo.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### EDIT FORUM
+PUT http://localhost:9000/api/edit
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="id"
+
+baa0e86a-bdd2-4ea4-917b-13cb6d14cd33
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Updated Forum Title
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+Updated forum description.
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="icon"; filename="node.png"
+Content-Type: image/png
+
+< ./path/to/new-forum-icon.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### ADD MEMBER TO FORUM
+POST http://localhost:9000/api/add-member
 Content-Type: application/json
 
 {
-    "title": "Web Development",
-    "description": "Discuss web development topics",
-    "iconUrl": "https://example.com/icon.png"
+    "forum_id": "baa0e86a-bdd2-4ea4-917b-13cb6d14cd33",
+    "user_id": "fc5b236e-cd66-4834-b1f6-ffd8f4c7f97a"
 }
+
+### SEND FORUM MESSAGE
+POST http://localhost:9000/api/send-message
+Content-Type: application/json
+
+{
+    "forum_id": "baa0e86a-bdd2-4ea4-917b-13cb6d14cd33",
+    "sender_id": "fc5b236e-cd66-4834-b1f6-ffd8f4c7f97a",
+    "message": "Hello everyone! Let's discuss Angular today."
+}
+
+### GET FORUM MEMBERS
+GET http://localhost:9000/api/baa0e86a-bdd2-4ea4-917b-13cb6d14cd33/members
+Content-Type: application/json
+
+### GET FORUM MESSAGES
+GET http://localhost:9000/api/baa0e86a-bdd2-4ea4-917b-13cb6d14cd33/messages
+Content-Type: application/json
+
+### SOFT DELETE FORUM
+DELETE http://localhost:9000/api/delete/baa0e86a-bdd2-4ea4-917b-13cb6d14cd33
+Content-Type: application/json
+
+### UPLOAD FORUM ICON (Multipart Form Data)
+POST http://localhost:9000/api/upload-icon
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="forum-icon.png"
+Content-Type: image/png
+
+< ./path/to/forum-icon.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+
+
+### fetch all forums
+GET http://localhost:9000/api/forums
+Content-Type: application/json
+
+### fetch single forumn
+GET http://localhost:9000/api/baa0e86a-bdd2-4ea4-917b-13cb6d14cd33
+Content-Type: application/json

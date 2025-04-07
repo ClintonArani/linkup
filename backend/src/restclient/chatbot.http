@@ -1,0 +1,8 @@
+### CHAT WITH COMPANY BOT
+POST http://localhost:9000/chatbot/ask
+Content-Type: application/json
+
+{
+    "message": "How do I borrow a book?"
+}
+

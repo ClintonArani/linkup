@@ -38,24 +38,11 @@
             <label for="quantity">Quantity</label>
             <input type="number" class="form-control" id="quantity" formControlName="quantity" />
           </div>
-          <div class="form-group">
-            <label for="file">File</label>
-            <input type="file" class="form-control" id="file" (change)="onFileChange($event, 'file')" />
-            <small *ngIf="resourceForm.get('file')?.value" class="text-muted">
-              Selected File: {{ resourceForm.get('file')?.value.name }}
-            </small>
-          </div>
-          <div class="form-group">
-            <label for="image">Image</label>
-            <input type="file" class="form-control" id="image" (change)="onFileChange($event, 'image')" />
-            <small *ngIf="resourceForm.get('image')?.value" class="text-muted">
-              Selected Image: {{ resourceForm.get('image')?.value.name }}
-            </small>
-          </div>
-          <button type="submit" class="btn btn-primary">
+
+          <button type="submit" class="btn btn-primary m-3">
             {{ isEditMode ? 'Update Resource' : 'Add Resource' }}
           </button>
-          <button type="button" class="btn btn-secondary ml-2" (click)="hideForm()">Cancel</button>
+          <button type="button" class="btn btn-secondary m-3 " (click)="hideForm()">Cancel</button>
         </form>
       </div>
     </div>
@@ -64,6 +51,7 @@
     <table class="table mt-4">
       <thead>
         <tr>
+          <th>ISBN</th>
           <th>Title</th>
           <th>Description</th>
           <th>Quantity</th>
@@ -71,7 +59,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let resource of resources">
+        <tr *ngFor="let resource of resources; let i = index; ">
+          <td>{{ i + 1}}</td>
           <td>{{ resource.title }}</td>
           <td>{{ resource.description }}</td>
           <td>{{ resource.quantity }}</td>

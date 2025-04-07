@@ -3,8 +3,7 @@ CREATE TABLE resources (
     id VARCHAR(255) PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
-    filePath VARCHAR(255) NOT NULL, -- Path to the uploaded file (PDF, DOC, etc.)
-    imagePath VARCHAR(255), -- Path to the uploaded image
+    quantity INT,
     isDeleted BIT DEFAULT 0,
     createdAt DATETIME NOT NULL,
     updatedAt DATETIME
@@ -22,4 +21,7 @@ CREATE TABLE borrowed_books (
     FOREIGN KEY (resource_id) REFERENCES resources(id)
 );
 
-use university
+drop table resources
+
+drop table borrowed_books
+

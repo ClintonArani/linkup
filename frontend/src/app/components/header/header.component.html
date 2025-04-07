@@ -1,0 +1,13 @@
+<div class="component">
+    <div class="logo">
+        <img src="assets/logo.png" alt="">
+    </div>
+    <ul>
+        <li (click)="scrollTo('home')" [class.active]="activeSection === 'home'">home</li>
+        <li (click)="scrollTo('about')" [class.active]="activeSection === 'about'">about</li>
+        <li (click)="scrollTo('course')" [class.active]="activeSection === 'course'">course</li>
+        <li (click)="scrollTo('service')" [class.active]="activeSection === 'service'">service</li>
+        <li (click)="scrollTo('contact')" [class.active]="activeSection === 'contact'">contact</li>
+        <li><i class="fas fa-user"></i></li>
+    </ul>
+</div>

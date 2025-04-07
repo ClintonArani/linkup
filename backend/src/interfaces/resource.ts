@@ -2,8 +2,8 @@ export interface Resource {
     id?: string;
     title: string;
     description: string;
-    filePath: string;
-    imagePath: string;
+    filePath?: string;
+    imagePath?: string;
     quantity: number; // Add this field
     isDeleted?: boolean;
     createdAt?: Date;

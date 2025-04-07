@@ -8,39 +8,26 @@ let service = new ResourceService();
 export class ResourceController {
     async addResource(req: Request, res: Response) {
         try {
-            console.log('Request headers:', req.headers); // Log request headers
-            console.log('Request body:', req.body); // Log request body
-            console.log('Request files:', req.files); // Log request files
-    
+            console.log('Request headers:', req.headers);
+            console.log('Request body:', req.body);
+
+            // Validate request body
             const { error } = resourceSchema.validate(req.body);
             if (error) {
-                console.error(`Validation error: ${error.message}`); // Log validation error
+                console.error(`Validation error: ${error.message}`);
                 return res.status(400).json({ error: error.message });
             }
-    
+
             const { title, description, quantity } = req.body;
-            const file = req.files?.file;
-            const image = req.files?.image;
-    
-            if (!file || !image) {
-                console.error('File or image is missing'); // Log missing file or image
-                return res.status(400).json({ error: "File and image are required" });
-            }
-    
-            // Create a temporary resource object without filePath and imagePath
-            const resource = {
-                title,
-                description,
-                quantity,
-                filePath: '', // Placeholder, will be updated after file upload
-                imagePath: '', // Placeholder, will be updated after image upload
-            };
-    
-            // Pass the resource object and files to the service
-            let result = await service.addResource(resource, file, image);
+
+            // Create resource object
+            const resource = { title, description, quantity };
+
+            // Save resource without files
+            let result = await service.addResource(resource);
             return res.status(201).json(result);
         } catch (error) {
-            console.error(`Error adding resource: ${error}`); // Log general error
+            console.error(`Error adding resource: ${error}`);
             return res.status(500).json({ error: "Failed to add resource" });
         }
     }
@@ -49,10 +36,9 @@ export class ResourceController {
         try {
             const { resource_id } = req.params;
             const { title, description, quantity } = req.body;
-            const file = req.files?.file;
-            const image = req.files?.image;
 
-            let result = await service.editResource(resource_id, { title, description, quantity }, file, image);
+            // Update resource without files
+            let result = await service.editResource(resource_id, { title, description, quantity });
             return res.status(200).json(result);
         } catch (error) {
             console.error(`Error editing resource: ${error}`);

@@ -18,9 +18,9 @@
       <li routerLink="/admin/internships" [class.active]="activeTab === 'postInternships'" (click)="setActiveTab('postInternships')">
         <i class="fas fa-briefcase"></i> Attachments
       </li>
-      <li routerLink="/admin/reports" [class.active]="activeTab === 'reportsAnalytics'" (click)="setActiveTab('reportsAnalytics')">
+      <!-- <li routerLink="/admin/reports" [class.active]="activeTab === 'reportsAnalytics'" (click)="setActiveTab('reportsAnalytics')">
         <i class="fas fa-chart-line"></i> Reports & Analytics
-      </li>
+      </li> -->
       <li (click)="onLogout()">
         <i class="fas fa-sign-out-alt"></i> Logout
       </li>
@@ -32,25 +32,18 @@
     <!-- Navbar -->
     <nav class="navbar">
       <div class="navbar-left">
-        <div class="menu-icon" (click)="toggleSidebar($event)" tabindex="0" aria-label="Toggle Sidebar">
+        <div class="menu-icon" (click)="toggleSidebar($event)">
           <i class="fas fa-bars"></i>
         </div>
-        <div class="search-bar">
-          <input type="text" placeholder="Search..." />
-          <i class="fas fa-search"></i>
+        <div class="welcome">
+          <h2>Welcome Admin</h2>
         </div>
       </div>
+   
       <div class="navbar-right">
-        <div class="theme-toggle" (click)="toggleTheme()">
-          <i [class]="isDarkMode ? 'fas fa-sun' : 'fas fa-moon'"></i>
-        </div>
-        <div class="notification-icon" (click)="showNotifications()">
-          <i class="fas fa-bell"></i>
-          <span class="badge">{{ notificationsCount }}</span>
-        </div>
         <div class="profile" (click)="toggleProfileDropdown()">
           <img src="assets/image2.png" alt="Admin Profile" />
-          <span>Admin</span>
+          <span>{{ userName }}</span>
           <div class="dropdown" [class.show]="isProfileDropdownVisible">
             <a href="#">Settings</a>
             <a href="#">Help</a>

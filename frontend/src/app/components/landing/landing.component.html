@@ -1,0 +1,219 @@
+<app-header (scrollToSection)="onScrollToSection($event)"></app-header>
+<div class="home">
+    <!-- section one -->
+    <section class="homeSection" id="home">
+        <div class="top">
+            <h1>Everybody has to learn <br> for a beautiful world</h1>
+            <p>Education the best way for make a beautiful and wonderful country. Everybody need to <br> education for our country and our environment. Education is strength for all </p>
+            <button>join us</button>
+        </div>
+        <div class="bottom">
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-front">
+                        <i class="fas fa-book"></i>
+                        <h3>free online course</h3>
+                        <p>eduction the best way to make <br> beautiful and wonderful country</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>free online course</h3>
+                        <p>eduction the best way to make <br>beautiful and wonderful country</p>
+                        <button>read more</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-front">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>best university teacher</h3>
+                        <p>eduction the best way to make <br>beautiful and wonderful country</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>best university teacher</h3>
+                        <p>eduction the best way to make <br> beautiful and wonderful country</p>
+                        <button>read more</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-front">
+                        <i class="fas fa-book-open"></i>
+                        <h3>awesome environment</h3>
+                        <p>eduction the best way to make <br> beautiful and wonderful country</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>awesome environment</h3>
+                        <p>eduction the best way to make <br>beautiful and wonderful country</p>
+                        <button>read more</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="left">
+            <img src="assets/about2.png" alt="">
+        </div>
+        <div class="right">
+            <h6>about unicconect</h6>
+            <h3>unicconect is the trusted &  belivable<br> university <span class="text-danger">connection platform.</span></h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ipsa impedit <br> tempore libero vero? Cum, in molestias pariatur vitae sed suscipit aliquid? <br>Beatae est eos molestias blanditiis maxime facilis quos rerum! Natus atque,<br> adipisci consequatur voluptatibus, nam numquam omnis officia perferendis <br>quas voluptatem inventore veniam voluptatum dolorum quis quae praesentium?</p>
+            <button>read more</button>
+        </div>
+    </section>
+    <section class="course">
+        <div class="para">
+            <div class="left">
+                <h2>featured course</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam</p>
+            </div>
+            <button>all courses</button>
+        </div>
+        <div class="cards">
+            <div class="card1">
+                <div class="top">
+                    <img src="assets/course1.jpg" alt="">
+                </div>
+                <div class="bottom">
+                    <img src="assets/author1.jpg" alt="">
+                    <h3>advance web design</h3>
+                    <p>Morem ipsum dolor sit amet, consectetue adip plit, awesome creative course.</p>
+                    <div class="icons">
+                        <span>
+                            <i class="fas fa-thumbs-up"></i>
+                            <p>10</p>
+                        </span>
+                        <span>
+                            <i class="fas fa-comment"></i>
+                            <p>8</p>
+                        </span>
+                        <p class="text-danger fw-bold">{{340 | currency }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card1">
+                <div class="top">
+                    <img src="assets/course2.jpg" alt="">
+                </div>
+                <div class="bottom">
+                    <img src="assets/bill.jpg" alt="">
+                    <h3>web development</h3>
+                    <p>Morem ipsum dolor sit amet, consectetue adip plit, awesome creative course.</p>
+                    <div class="icons">
+                        <span>
+                            <i class="fas fa-thumbs-up"></i>
+                            <p>10</p>
+                        </span>
+                        <span>
+                            <i class="fas fa-comment"></i>
+                            <p>8</p>
+                        </span>
+                        <p class="text-danger fw-bold">{{340 | currency }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card1">
+                <div class="top">
+                    <img src="assets/course4.jpg" alt="">
+                </div>
+                <div class="bottom">
+                    <img src="assets/author2.jpg" alt="">
+                    <h3>graphics & logo design</h3>
+                    <p>Morem ipsum dolor sit amet, consectetue adip plit, awesome creative course.</p>
+                    <div class="icons">
+                        <span>
+                            <i class="fas fa-thumbs-up"></i>
+                            <p>10</p>
+                        </span>
+                        <span>
+                            <i class="fas fa-comment"></i>
+                            <p>8</p>
+                        </span>
+                        <p class="text-danger fw-bold">{{340 | currency }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- our services section -->
+    <section class="services">
+        <h2>our services</h2>
+        <div class="service">
+            <div class="left">
+                <div>
+                    <div class="text">
+                        <h3>special education</h3>
+                        <p>We offer inclusive and personalized learning <br> programs for students with special needs. Our <br> team provides support tailored to individual <br> abilities, ensuring every learner thrives <br>academically</p>
+                    </div>
+                    <i class="fas fa-universal-access"></i>
+                </div>
+                <div>
+                    <div class="text">
+                        <h3>Language Lessons</h3>
+                        <p>Master new languages with our expert-led les <br> designed for all proficiency levels. Whether yo <br> learning for school, travel, or career growth, o <br> sessions are immersive and engaging.</p>
+                    </div>
+                    <i class="fas fa-language"></i>
+                </div>
+                <div>
+                    <div class="text">
+                        <h3>Library</h3>
+                        <p>Access a rich collection of digital and physical <br> journals, and academic resources. Our library  <br> both leisurely reading and in-depth research. <br> With quiet study zones </p>
+                    </div>
+                    <i class="fas fa-book"></i>
+                </div>
+    
+            </div>
+            <div class="middle">
+                <img src="assets/service-img.png" alt="">
+            </div>
+            <div class="right">
+                <div>
+                    <div class="text">
+                        <h3>Attachments</h3>
+                        <p>Connect with top organizations for real-world <br> experience through our structured attachment <br> programs. Students gain valuable industry exposure <br>aligned with their fields of study.</p>
+                    </div>
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div>
+                    <div class="text">
+                        <h3>Linkups</h3>
+                        <p>Foster meaningful professional and academic connect<br> within our community. Linkups help you meet peers, a  <br> and experts for collaboration, mentorship, and shared </p>
+                    </div>
+                    <i class="fas fa-users"></i>
+                </div>
+                <div>
+                    <div class="text">
+                        <h3>Bookmarks</h3>
+                        <p>Easily save your favorite articles, courses, and content <br> for quick access anytime. Our bookmarking feature <br> helps you stay organized and return to important <br> resources when needed</p>
+                    </div>
+                    <i class="fas fa-bookmark"></i>
+                </div>
+    
+            </div>
+        </div>
+    </section>
+    <section class="contact">
+        <h2>contact with us</h2>
+        <form action="">
+            <div class="input">
+                <input type="text" placeholder="Name">
+            </div>
+            <div class="input">
+                <input type="email" placeholder="Email">
+            </div>
+            <div class="input">
+                <input type="text" placeholder="Subject">
+            </div>
+            <div class="input">
+                <textarea name="" id="" cols="30" rows="2" placeholder="Message"></textarea>
+            </div>
+        </form>
+    </section>
+</div>
+
+<app-footer/>
+    

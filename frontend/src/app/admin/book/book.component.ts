@@ -26,8 +26,6 @@ export class BookComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       quantity: ['', [Validators.required, Validators.min(1)]],
-      file: [null],
-      image: [null],
     });
   }
   
@@ -67,14 +65,6 @@ export class BookComponent implements OnInit {
     );
   }
 
-  // Handle file input change
-  onFileChange(event: any, field: string): void {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.resourceForm.get(field)?.setValue(file);
-    }
-  }
-
   // Submit the form
   onSubmit(): void {
     if (this.resourceForm.invalid) {
@@ -86,8 +76,6 @@ export class BookComponent implements OnInit {
     formData.append('title', this.resourceForm.get('title')?.value);
     formData.append('description', this.resourceForm.get('description')?.value);
     formData.append('quantity', this.resourceForm.get('quantity')?.value);
-    formData.append('file', this.resourceForm.get('file')?.value);
-    formData.append('image', this.resourceForm.get('image')?.value);
 
     if (this.isEditMode && this.selectedResourceId) {
       this.bookService.editResource(this.selectedResourceId, formData).subscribe(

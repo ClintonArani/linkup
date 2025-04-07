@@ -16,7 +16,5 @@ CREATE TABLE users(
     updatedAt DATETIME,
     role VARCHAR(50) DEFAULT 'student'
 )
- 
-drop table users
 
-
+select * from users
